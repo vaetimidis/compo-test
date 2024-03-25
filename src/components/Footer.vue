@@ -1,3 +1,25 @@
+<script setup lang="ts">
+  import {ref} from 'vue'
+
+  const links = ref([
+    {
+      title: 'Женщинам',
+      items: ['Одежда', 'Обувь', 'Аксессуары', 'Белье', 'Bra fitting']
+    },
+    {
+      title: 'Мужчинам',
+      items: ['Одежда', 'Обувь', 'Аксессуары', 'Белье']
+    },
+    {
+      title: 'Детям',
+      items: ['Одежда', 'Обувь', 'Аксессуары', 'Белье', 'Игрушки', 'Малыши']
+    },
+    {
+      title: 'Виды спорта',
+      items: ['Велоспорт', 'Туризм', 'Тренажеры и фитнес', 'Командные виды спорта', 'Самокаты']
+    }])
+</script>
+
 <template>
   <footer class="footer">
     <div class="footer__top">
@@ -30,89 +52,13 @@
       </div>
     </div>
     <div class="footer__main catalog">
-      <div class="catalog__item">
+      <div v-for="item in links" class="catalog__item">
         <div class="menu-header">
-          Женщинам
+          {{item.title}}
         </div>
         <ul class="menu">
-          <li class="menu__item">
-            Одежда
-          </li>
-          <li class="menu__item">
-            Обувь
-          </li>
-          <li class="menu__item">
-            Аксессуары
-          </li>
-          <li class="menu__item">
-            Белье
-          </li>
-          <li class="menu__item">
-            Bra fitting
-          </li>
-        </ul>
-      </div>
-      <div class="catalog__item">
-        <div class="menu-header">
-          Мужчинам
-        </div>
-        <ul class="menu">
-          <li class="menu__item">
-            Одежда
-          </li>
-          <li class="menu__item">
-            Обувь
-          </li>
-          <li class="menu__item">
-            Аксессуары
-          </li>
-          <li class="menu__item">
-            Белье
-          </li>
-        </ul>
-      </div> <div class="catalog__item">
-        <div class="menu-header">
-          Детям
-        </div>
-        <ul class="menu">
-          <li class="menu__item">
-            Одежда
-          </li>
-          <li class="menu__item">
-            Обувь
-          </li>
-          <li class="menu__item">
-            Аксессуары
-          </li>
-          <li class="menu__item">
-            Белье
-          </li>
-          <li class="menu__item">
-            Игрушки
-          </li>
-          <li class="menu__item">
-            Малыши
-          </li>
-        </ul>
-      </div> <div class="catalog__item">
-        <div class="menu-header">
-          Виды спорта
-        </div>
-        <ul class="menu">
-          <li class="menu__item">
-            Велоспорт
-          </li>
-          <li class="menu__item">
-            Туризм
-          </li>
-          <li class="menu__item">
-            Тренажеры и фитнес
-          </li>
-          <li class="menu__item">
-            Командные виды спорта
-          </li>
-          <li class="menu__item">
-            Самокаты
+          <li v-for="link in item.items" class="menu__item">
+            {{ link }}
           </li>
         </ul>
       </div>
