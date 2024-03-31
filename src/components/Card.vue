@@ -1,4 +1,7 @@
+<!-- eslint-disable import/order -->
 <script setup lang="ts">
+import Breadcrumbs from './Breadcrumbs.vue'
+
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/vue'
 
 import 'swiper/css'
@@ -82,9 +85,12 @@ const slides = [
 </script>
 
 <template>
-  <h1 class="title">
-    Кроссовки мужские Skechers Sunny Dale
-  </h1>
+  <div class="card-title">
+    <Breadcrumbs />
+    <h2 class="title">
+      Кроссовки мужские Skechers Sunny Dale
+    </h2>
+  </div>
   <div class="card">
     <div class="card__sliders">
       <div class="slider">
@@ -169,16 +175,11 @@ const slides = [
               </div>
             </div>
           </div>
-          <div class="buttons">
-            <button class="counter">
-              <div class="counter__cart">
-                <img src="/public/cart-white.svg" alt="cart">
-                <span class="couner__text">В корзину</span>
-              </div>
+          <div class="card__buttons">
+            <button class="button button--blue button--card-cart">
+              В корзину
             </button>
-            <button class="heart">
-              <img src="/public/heart.svg" alt="heart">
-            </button>
+            <button aria-label="" class="button button--lightblue button--card-favorite" />
           </div>
         </div>
         <div class="card__line" />
@@ -332,6 +333,12 @@ const slides = [
       width: 1px;
     }
 
+    &__buttons {
+      align-items: center;
+      display: flex;
+      gap: 16px;
+    }
+
     &__values {
       display: flex;
       flex-direction: column;
@@ -471,101 +478,58 @@ const slides = [
     }
 }
 
-    .slider-navigation {
-      width: 400px;
+.slider-navigation {
+  width: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+    &__wrapper {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-        &__wrapper {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 100%;
-        }
-
-        button {
-          background: transparent;
-          border: none;
-          cursor: pointer;
-        }
-
-        img {
-          width: 40px;
-          height: 40px;
-          margin: 0 10px;
-        }
-    }
-
-    .buttons {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: flex-start;
-      gap: 24px;
-    }
-
-    .counter {
-      display: flex;
-      flex-direction: row;
       align-items: center;
       justify-content: center;
-      width: 284px;
-      height: 56px;
-
-      background-color: #1551E5;
-      color: #fff;
-      padding: 16px 24px;
-      border-radius: 8px;
-
-      &__cart {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        gap: 12px;
-      }
+      width: 100%;
     }
 
-    .heart {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-
-      background-color: #F2F6FF;
-      padding: 16px 24px;
-      border-radius: 8px;
-      width: 72px;
-      height: 56px;
+    button {
+      background: transparent;
+      border: none;
+      cursor: pointer;
     }
 
-    .article {
-      display: flex;
-      flex-direction: column;
-      flex-wrap: wrap;
-      gap: 24px;
-      max-height: 294px;
-
-      &__item {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        height: 44px;
-      }
-
-      &__title {
-        font-weight: 700;
-        font-size: 14px;
-        line-height: 16px;
-        color: #071435;
-      }
-
-      &__subtitle {
-        font-weight: 400;
-        font-size: 12px;
-        line-height: 16px;
-        color: #828EAD;
-      }
+    img {
+      width: 40px;
+      height: 40px;
+      margin: 0 10px;
     }
+}
+
+.article {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 24px;
+  max-height: 294px;
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    height: 44px;
+  }
+
+  &__title {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 16px;
+    color: #071435;
+  }
+
+  &__subtitle {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    color: #828EAD;
+  }
+}
 </style>

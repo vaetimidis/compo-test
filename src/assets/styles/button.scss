@@ -73,4 +73,27 @@
             width: 32px;
         }
     }
+
+    &--card-favorite {
+        padding-bottom: 16px;
+        padding-top: 16px;
+
+        &:before {
+            content: url("/public/heart.svg");
+            height: 24px;
+            width: 24px;
+        }
+    }
+
+    &--card-cart {
+        padding-bottom: 16px;
+        padding-top: 16px;
+        width: 284px;
+
+        &:before {
+            content: url("/public/cart-white.svg");
+            height: 24px;
+            width: 24px;
+        }
+    }
 }
