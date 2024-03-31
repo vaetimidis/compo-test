@@ -24,18 +24,24 @@ function onSwiper(instance) {
 }
 
 function slideNext() {
-  if (swiper.value)
+  if (swiper.value) {
     swiper.value.slideNext()
+    thumbsSwiper.value.slideNext()
+  }
 }
 
 function slidePrev() {
-  if (swiper.value)
+  if (swiper.value) {
     swiper.value.slidePrev()
+    thumbsSwiper.value.slidePrev()
+  }
 }
 
 function slideToIndex(index) {
-  if (swiper.value)
-    swiper.value.slideTo(index)
+  if (swiper.value) {
+    swiper.value.slideToLoop(index)
+    thumbsSwiper.value.slideTo(index)
+  }
 }
 
 function increase() {
@@ -141,7 +147,7 @@ const slides = [
       </div>
       <div class="slider-navigation">
         <button aria-label="" class="button button--lightblue button--prev" @click="slidePrev()" />
-        <Swiper class="slider-navigation__wrapper" :slides-per-view="4" watch-slides-progress :modules="Thumbs" @swiper="setThumbsSwiper">
+        <Swiper class="slider-navigation__wrapper" :slides-per-view="4" watch-slides-progress :modules="Thumbs" :navigation="{ nextEl: '.swiper-button-prev', prevEl: '.swiper-button-prev' }" @swiper="setThumbsSwiper">
           <SwiperSlide v-for="(item, index) in slides" :key="item.id" aria-label="" class="slider-navigation__item" @click="slideToIndex(index)">
             <img alt="" height="" :src="item.img" width="">
           </SwiperSlide>
