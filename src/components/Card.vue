@@ -1,4 +1,3 @@
-<!-- eslint-disable import/order -->
 <script setup lang="ts">
 import Breadcrumbs from './Breadcrumbs.vue'
 

@@ -22,6 +22,9 @@ import Card from './components/Card.vue'
     display: flex;
     flex-direction: column;
     gap: 32px;
+    max-width: 1600px;
+    margin-left: auto;
+    margin-right: auto;
     padding: 32px 24px;
   }
 </style>

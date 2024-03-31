@@ -161,6 +161,9 @@ const links = ref([
   display: flex;
   flex-direction: column;
   gap: 48px;
+  max-width: 1600px;
+  margin-left: auto;
+  margin-right: auto;
   padding: 0 24px;
 
   &__line {

@@ -56,18 +56,50 @@ input {
 
   &__top {
     align-items: center;
-    border-bottom: 1px solid #E1E5EB;
     display: flex;
     gap: 24px;
+    max-width: 1600px;
+    margin-left: auto;
+    margin-right: auto;
     padding: 16px 24px;
+    position: relative;
+    z-index: 1;
+
+    &:before {
+      background: #E1E5EB;
+      bottom: 0;
+      content: "";
+      height: 1px;
+      left: 50%;
+      position: absolute;
+      transform: translate(-50%);
+      width: 100vw;
+      z-index: -1;
+    }
   }
 
   &__bottom {
     align-items: center;
-    border-bottom: 1px solid #E1E5EB;
     display: flex;
     gap: 16px;
+    max-width: 1600px;
+    margin-left: auto;
+    margin-right: auto;
     padding: 12px 24px;
+    position: relative;
+    z-index: 1;
+
+    &:before {
+      background: #E1E5EB;
+      bottom: 0;
+      content: "";
+      height: 1px;
+      left: 50%;
+      position: absolute;
+      transform: translate(-50%);
+      width: 100vw;
+      z-index: -1;
+    }
   }
 
   &__line {

@@ -117,4 +117,26 @@
             width: 32px;
         }
     }
+
+    &--minus {
+        height: 24px;
+        width: 24px;
+
+        &:before {
+            content: url("/public/minus.svg");
+            height: 24px;
+            width: 24px;
+        }
+    }
+
+    &--plus {
+        height: 24px;
+        width: 24px;
+
+        &:before {
+            content: url("/public/plus.svg");
+            height: 24px;
+            width: 24px;
+        }
+    }
 }
