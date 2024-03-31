@@ -1,9 +1,11 @@
+<script>
+import Logo from '../components/Logo.vue'
+</script>
+
 <template>
   <header class="header">
     <div class="header__top">
-      <div class="logo logo--copy">
-        <img alt="" height="" src="/public/logo.svg" width="">
-      </div>
+      <Logo />
       <button class="button button--blue button--menu">
         Меню
       </button>

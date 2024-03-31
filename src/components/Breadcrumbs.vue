@@ -10,26 +10,37 @@ const breadcrumbs = [{ id: 1, title: 'Каталог', link: '/1' }, { id: 2, ti
 
 <style scoped lang="scss">
 .breadcrumbs {
-    width: 100%;
-    height: 16px;
+  align-items: center;
+  display: flex;
+  gap: 4px;
 
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
+  &__link {
+    color: #828EAD;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    text-decoration: none;
+    transition: opacity .3s;
 
-    &__link {
-        margin-right: 4px;
-        text-decoration: none;
-        color: #828EAD;
-
-        &:not(:first-child)::before {
-            content: '/';
-            line-height: 16px;
-            font-size: 12px;
-            font-weight: 400;
-            margin-right: 4px;
-        }
+    &:not(:last-child) {
+      &:after {
+        content: '/';
+        margin-left: 4px;
+      }
     }
+
+    @media (hover: none), (pointer: coarse) {
+      &:active {
+        opacity: .7;
+      }
+    }
+
+    @media not all and (pointer: coarse) {
+      &:hover,
+      &:active {
+        opacity: .7;
+      }
+    }
+  }
 }
 </style>

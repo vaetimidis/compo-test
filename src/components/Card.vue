@@ -8,7 +8,7 @@ import { ref } from 'vue'
 
 const swiper = ref<typeof Swiper | null>(null)
 
-function onSwiper(instance: typeof Swiper) {
+function onSwiper(instance) {
   swiper.value = instance
 }
 
@@ -105,23 +105,23 @@ const slides = [
         </div>
       </div>
       <div class="slider-navigation">
-        <button class="swiper-button-prev" @click="slidePrev()">
-          <img src="" alt="Previous">
+        <button class="button-prev" @click="slidePrev()">
+          <img src="/public/icon-left.svg" alt="Previous">
         </button>
         <div class="slider-navigation__wrapper">
-          <button v-for="(item, index) in slides" :key="item.id" @click="slideToIndex(index)">
+          <button v-for="(item, index) in slides" :key="item.id" class="slider-navigation__item" @click="slideToIndex(index)">
             <img :src="item.img" alt="">
           </button>
         </div>
-        <button class="swiper-button-next" @click="slideNext()">
-          <img src="" alt="Next">
+        <button class="button-next" @click="slideNext()">
+          <img src="/public/icon-right.svg" alt="Next">
         </button>
       </div>
     </div>
     <div class="card__content">
-      <div class="characteristics">
-        <div class="characteristics__settings">
-          <div class="characteristics__settings_top">
+      <div class="card__characteristics">
+        <div class="card__settings-cont">
+          <div class="card__settings-group">
             <div class="price">
               <span class="price__old">166 534.00 цена без скидки</span>
               <div class="price__current">
@@ -131,51 +131,59 @@ const slides = [
                 </div>
               </div>
             </div>
-            <div class="settings">
-              <span class="settings__amount">12 штук в уп.</span>
-              <label class="switch">
-                <input type="checkbox">
-                <span class="switch__slider round" />
-              </label>
-              <span class="settings__text">Заказ упаковкой</span>
+            <div class="card__settings">
+              <span class="card__amount">12 штук в уп.</span>
+              <div class="card__switch">
+                <label class="switch">
+                  <input type="checkbox" checked>
+                  <span class="switch__slider round" />
+                </label>
+                Заказ упаковкой
+              </div>
             </div>
           </div>
-          <div class="characteristics__settings_bottom">
-            <div class="order-info">
-              <div class="order-info__item">
-                <h6 class="order-info__item_top">
-                  Завтра
-                </h6>
-                <span class="order-info__item_bottom">Доставка</span>
+          <div class="card__settings-line" />
+          <div class="card__info">
+            <div class="card__info-item">
+              <div class="card__info-item-title">
+                Завтра
               </div>
-              <div class="order-info__item">
-                <h6 class="order-info__item_top">
-                  7 шт.
-                </h6>
-                <span class="order-info__item_bottom">Тарасовка</span>
-              </div>
-              <div class="order-info__item">
-                <h6 class="order-info__item_top">
-                  7 шт.
-                </h6>
-                <span class="order-info__item_bottom">Тарасовка</span>
+              <div class="card__info-item-text">
+                Доставка
               </div>
             </div>
-            <div class="buttons">
-              <button class="counter">
-                <div class="counter__cart">
-                  <img src="/public/cart-white.svg" alt="cart">
-                  <span class="couner__text">В корзину</span>
-                </div>
-              </button>
-              <button class="heart">
-                <img src="/public/heart.svg" alt="heart">
-              </button>
+            <div class="card__info-item">
+              <div class="card__info-item-title">
+                7 шт.
+              </div>
+              <div class="card__info-item-text">
+                Тарасовка
+              </div>
             </div>
+            <div class="card__info__item">
+              <div class="card__info-item-title">
+                7 шт.
+              </div>
+              <div class="card__info-item-text">
+                Тарасовка
+              </div>
+            </div>
+          </div>
+          <div class="buttons">
+            <button class="counter">
+              <div class="counter__cart">
+                <img src="/public/cart-white.svg" alt="cart">
+                <span class="couner__text">В корзину</span>
+              </div>
+            </button>
+            <button class="heart">
+              <img src="/public/heart.svg" alt="heart">
+            </button>
           </div>
         </div>
-        <div class="characteristics__values">
-          <h4 class="characteristics__title">
+        <div class="card__line" />
+        <div class="card__values">
+          <h4 class="card__title">
             Характеристики
           </h4>
           <div class="article">
@@ -191,9 +199,9 @@ const slides = [
         </div>
       </div>
       <div class="card__description">
-        <h2 class="card__title">
+        <h3 class="card__title">
           Описание товара
-        </h2>
+        </h3>
         <p class="card__text">
           Создание приверженного покупателя специфицирует неопровержимый комплексный анализ ситуации. CTR существенно индуцирует из ряда вон выходящий SWOT-анализ. Воздействие на потребителя определяет возрастающий интеграл по поверхности, что известно даже школьникам. Отсюда естественно следует, что коммуникация уравновешивает косвенный фактор коммуникации. Поле направлений естественно допускает экспериментальный скачок функции, таким образом сбылась мечта идиота - утверждение полностью доказано. Арифметическая прогрессия притягивает линейно зависимый пул лояльных изданий.
         </p>
@@ -203,6 +211,266 @@ const slides = [
 </template>
 
 <style scoped lang="scss">
+  .card-title {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .title {
+    color: #071435;
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 32px;
+    text-transform: uppercase;
+  }
+
+  .card {
+    display: flex;
+    gap: 24px;
+
+    &__sliders {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      width: 400px;
+    }
+
+    &__content {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      gap: 48px;
+    }
+
+    &__sliders {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      width: 400px;
+    }
+
+    &__characteristics {
+        display: flex;
+        gap: 48px;
+    }
+
+    &__settings-cont {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    &__settings-group {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    &__settings {
+      align-items: center;
+      display: flex;
+      gap: 16px;
+    }
+
+    &__amount {
+      background: #F2F5F9;
+      color: #828EAD;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 16px;
+      padding: 5px 8px;
+    }
+
+    &__switch {
+      align-items: center;
+      color: #071435;
+      display: flex;
+      font-size: 14px;
+      font-weight: 500;
+      gap: 12px;
+      line-height: 16px;
+    }
+
+    &__settings-line {
+      background: #E2E4F0;
+      height: 1px;
+      width: 100%;
+    }
+
+    &__info {
+      align-items: center;
+      display: flex;
+      gap: 16px;
+    }
+
+    &__info-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      width: calc(100% / 3 - 2px);
+    }
+
+    &__info-item-title {
+      color: #071435;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 16px;
+    }
+
+    &__info-item-text {
+        color: #828EAD;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 16px;
+    }
+
+    &__line {
+      background: #E2E4F0;
+      height: 100%;
+      width: 1px;
+    }
+
+    &__values {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    &__title {
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 20px;
+      color: #071435;
+    }
+
+    &__description {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    &__title {
+      color: #071435;
+      font-size: 24px;
+      line-height: 28px;
+      font-weight: 500;
+    }
+
+    &__text {
+      color: #071435;
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 28px;
+    }
+  }
+
+  .price {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+
+      &__old {
+        color: #FF3D71;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 16px;
+      }
+
+      &__current {
+        align-items: center;
+        display: flex;
+        gap: 16px;
+      }
+
+       &__sum {
+          color: #071435;
+          font-size: 32px;
+          line-height: 22px;
+          letter-spacing: .01em;
+          font-weight: 700;
+        }
+
+        &__discount {
+          background: #FF3D71;
+          color: #FFFFFF;
+          border-radius: 4px;
+          font-size: 16px;
+          font-weight: 700;
+          line-height: 20px;
+          padding: 2px 8px;
+        }
+    }
+
+.switch {
+    height: 24px;
+    position: relative;
+    width: 40px;
+
+    input {
+        display: none;
+
+        &:checked + .switch__slider {
+            background: #1551E5;
+        }
+
+        &:focus + .switch__slider {
+          box-shadow: 0 0 1px #1551E5;
+        }
+
+        &:checked + .switch__slider:before {
+            transform: translateX(16px);
+        }
+    }
+
+    &__slider {
+      background: #CCCCCC;
+      bottom: 0;
+      cursor: pointer;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      transition: .3s;
+
+      &:before {
+        background: #FFFFFF;
+        bottom: 2px;
+        content: "";
+        height: 20px;
+        left: 2px;
+        position: absolute;
+        transition: .3s;
+        width: 20px;
+      }
+    }
+
+    .round {
+      border-radius: 32px;
+
+      &:before {
+        border-radius: 50%;
+      }
+    }
+}
+
+.slider {
+    display: flex;
+    max-width: 400px;
+    max-height: 400px;
+
+    &__inner {
+      width: 100%;
+      height: 100%;
+    }
+
+    &__item {
+      width: 100%;
+      height: 100%;
+    }
+}
+
     .slider-navigation {
       width: 400px;
       display: flex;
@@ -227,260 +495,6 @@ const slides = [
           height: 40px;
           margin: 0 10px;
         }
-    }
-
-    .title {
-        font-weight: 400;
-        font-size: 32px;
-        line-height: 32px;
-        margin: 24px 0 32px
-    }
-
-    .slider {
-        display: flex;
-        max-width: 400px;
-        max-height: 400px;
-
-        &__inner {
-          width: 100%;
-          height: 100%;
-        }
-
-        &__item {
-          width: 100%;
-          height: 100%;
-        }
-    }
-
-    .card {
-        display: flex;
-        flex-direction: row;
-
-        &__content {
-            display: flex;
-            flex-direction: column;
-            padding-left: 48px;
-            gap: 48px;
-        }
-
-        &__description {
-          display: flex;
-          flex-direction: column;
-          gap: 24px;
-        }
-
-        &__title {
-          font-weight: 500;
-          font-size: 24px;
-          line-height: 28px;
-          color: #071435;
-        }
-
-        &__text {
-          font-weight: 400;
-          font-size: 18px;
-          line-height: 28px;
-          color: #071435;
-        }
-
-        &__sliders {
-          display: flex;
-          flex-direction: column;
-          gap: 24px;
-        }
-    }
-
-    .characteristics {
-        display: flex;
-        flex-direction: row;
-        gap: 48px;
-
-        &__settings {
-          display: flex;
-          flex-direction: column;
-          gap: 32px;
-
-          &_top {
-            display: flex;
-            flex-direction: column;
-            padding-bottom: 32px;
-            gap: 32px;
-          }
-
-          &_bottom {
-            display: flex;
-            flex-direction: column;
-          }
-        }
-
-        &__values {
-          display: flex;
-          flex-direction: column;
-          gap: 32px;
-        }
-
-        &__title {
-          font-weight: 500;
-          font-size: 20px;
-          line-height: 20px;
-          color: #071435;
-        }
-    }
-
-    .price {
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-
-      &__old {
-        color: #FF3D71;
-        font-weight: 500;
-        font-size: 14px;
-        line-height: 16px;
-      }
-
-      &__current {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 16px;
-      }
-
-       &__sum {
-          font-size: 32px;
-          line-height: 48px;
-          letter-spacing: 1%;
-          font-weight: 700;
-        }
-
-        &__discount {
-          color: #FFFFFF;
-          border-radius: 4px;
-          padding: 2px 8px;
-          height: 22px;
-
-          font-size: 16px;
-          font-weight: 700;
-          line-height: 20px;
-
-          background-color: #FF3D71;
-
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-    }
-
-    .settings {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 16px;
-
-      &__amount {
-        padding: 8px;
-        border-radius: 8px;
-        display: flex;
-        gap: 10px;
-
-        background-color: #F2F5F9;
-        color: #828EAD;
-        line-height: 16px;
-        font-size: 14px;
-        font-weight: 700;
-      }
-
-      &__text {
-        font-weight: 500;
-        font-size: 14px;
-        line-height: 16px;
-      }
-    }
-
-    .switch {
-        position: relative;
-        display: inline-block;
-        width: 40px;
-        height: 24px;
-
-        input {
-            display:none;
-
-            &:checked + .switch__slider {
-                background-color: #1551E5;
-            }
-
-            &:focus + .switch__slider {
-                box-shadow: 0 0 1px #1551E5;
-            }
-
-            &:checked + .switch__slider:before {
-                -webkit-transform: translateX(16px);
-                -ms-transform: translateX(16px);
-                transform: translateX(16px);
-            }
-        }
-
-        &__slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ccc;
-            -webkit-transition: .4s;
-            transition: .4s;
-
-            &::before {
-                position: absolute;
-                content: "";
-                height: 16px;
-                width: 16px;
-                left: 4px;
-                bottom: 4px;
-                background-color: white;
-                -webkit-transition: .4s;
-                transition: .4s;
-            }
-        }
-
-        .round {
-        border-radius: 32px;
-
-            &::before {
-            border-radius: 50%;
-            }
-        }
-    }
-
-    .order-info {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 32px;
-
-      &__item {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-        width: 114px;
-        height: 40px;
-
-        &_top {
-          font-weight: 700;
-          font-size: 14px;
-          line-height: 16px;
-        }
-
-        &_bottom {
-          font-weight: 400;
-          font-size: 12px;
-          line-height: 16px;
-          color: #828EAD;
-        }
-      }
     }
 
     .buttons {
