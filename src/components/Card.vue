@@ -134,9 +134,7 @@ const slides = [
           :navigation="{ nextEl: '.swiper-button-prev', prevEl: '.swiper-button-prev' }"
           :pagination="{ clickable: true }"
           :space-between="50"
-          :loop="true"
           :modules="Thumbs"
-          :thumbs="{ swiper: thumbsSwiper }"
           class="js-slider"
           @swiper="onSwiper"
         >
