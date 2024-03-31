@@ -1,3 +1,4 @@
+<!-- eslint-disable import/order -->
 <script setup lang="ts">
 import Breadcrumbs from './Breadcrumbs.vue'
 
@@ -9,6 +10,8 @@ import 'swiper/css/pagination'
 import { ref } from 'vue'
 
 const swiper = ref<typeof Swiper | null>(null)
+const isEnabled = ref(false)
+const amount = ref(0)
 
 function onSwiper(instance) {
   swiper.value = instance
@@ -29,40 +32,53 @@ function slideToIndex(index) {
     swiper.value.slideTo(index)
 }
 
+function increase() {
+  amount.value += 1
+
+  isEnabled.value = true
+}
+
+function decrease() {
+  amount.value -= 1
+
+  if (amount.value === 0)
+    isEnabled.value = false
+}
+
 const articles = [
   {
     title: 'ELC00696',
-    text: 'Код поставщика',
+    subtitle: 'Код поставщика',
     id: 1,
   },
   {
     title: 'ELC00696',
-    text: 'Код РАЭК',
+    subtitle: 'Код РАЭК',
     id: 2,
   },
   {
     title: 'Electric used',
-    text: 'Бренд',
+    subtitle: 'Бренд',
     id: 3,
   },
   {
     title: 'ELC0200000696',
-    text: 'Код производителя',
+    subtitle: 'Код производителя',
     id: 4,
   },
   {
     title: 'ELC0200000696',
-    text: 'Артикул',
+    subtitle: 'Артикул',
     id: 5,
   },
   {
     title: 'ELC00696',
-    text: 'Код ЕТМ',
+    subtitle: 'Код ЕТМ',
     id: 6,
   },
   {
     title: 'ELC00696',
-    text: 'Серия',
+    subtitle: 'Серия',
     id: 7,
   },
 ]
@@ -91,29 +107,36 @@ const slides = [
     </h2>
   </div>
   <div class="card">
-    <div class="card__slider-cont">
+    <div class="card__sliders">
       <div class="slider">
-        <Swiper
-          :slides-per-view="1"
-          :navigation="{ nextEl: '.swiper-button-prev', prevEl: '.swiper-button-prev' }"
-          :pagination="{ clickable: true }"
-          :space-between="50"
-          class="js-slider"
-          @swiper="onSwiper"
-        >
-          <SwiperSlide v-for="item in slides" :key="item.id" class="slider__item">
-            <img alt="" height="" :src="item.img" width="">
-          </SwiperSlide>
-        </Swiper>
+        <div class="slider__inner">
+          <div class="js-slider">
+            <Swiper
+              :slides-per-view="1"
+              :navigation="{ nextEl: '.swiper-button-prev', prevEl: '.swiper-button-prev' }"
+              :pagination="{ clickable: true }"
+              :space-between="50"
+              @swiper="onSwiper"
+            >
+              <SwiperSlide v-for="item in slides" :key="item.id" class="slider__item">
+                <img :src="item.img" alt="">
+              </SwiperSlide>
+            </Swiper>
+          </div>
+        </div>
       </div>
       <div class="slider-navigation">
-        <button aria-label="" class="button button--lightblue button--prev" @click="slidePrev()" />
+        <button class="button-prev" @click="slidePrev()">
+          <img src="/public/icon-left.svg" alt="Previous">
+        </button>
         <div class="slider-navigation__wrapper">
-          <button v-for="(item, index) in slides" :key="item.id" aria-label="" class="slider-navigation__item" @click="slideToIndex(index)">
-            <img alt="" height="" :src="item.img" width="">
+          <button v-for="(item, index) in slides" :key="item.id" class="slider-navigation__item" @click="slideToIndex(index)">
+            <img :src="item.img" alt="">
           </button>
         </div>
-        <button aria-label="" class="button button--lightblue button--next" @click="slideNext()" />
+        <button class="button-next" @click="slideNext()">
+          <img src="/public/icon-right.svg" alt="Next">
+        </button>
       </div>
     </div>
     <div class="card__content">
@@ -168,24 +191,29 @@ const slides = [
             </div>
           </div>
           <div class="card__buttons">
-            <button class="button button--blue button--card-cart">
+            <button v-if="!isEnabled" class="button button--blue button--card-cart" @click="increase">
               В корзину
             </button>
+            <div v-else class="card__quantity">
+              <button aria-label="" class="button button--icon button--minus" @click="decrease" />
+              <span class="card__quantity-input">{{ amount }} штук</span>
+              <button aria-label="" class="button button--icon button--plus" @click="increase" />
+            </div>
             <button aria-label="" class="button button--lightblue button--card-favorite" />
           </div>
         </div>
         <div class="card__line" />
         <div class="card__values">
-          <h4 class="card__values-title">
+          <h4 class="card__title">
             Характеристики
           </h4>
-          <div class="card__values-list">
-            <div v-for="item in articles" :key="item.id" class="card__values-item">
-              <div class="card__values-item-title">
+          <div class="article">
+            <div v-for="item in articles" :key="item.id" class="article__item">
+              <h6 class="article__title">
                 {{ item.title }}
-              </div>
-              <div lass="card__values-item-text">
-                {{ item.text }}
+              </h6>
+              <div lass="article__subtitle">
+                {{ item.subtitle }}
               </div>
             </div>
           </div>
@@ -222,7 +250,7 @@ const slides = [
     display: flex;
     gap: 24px;
 
-    &__slider-cont {
+    &__sliders {
       display: flex;
       flex-direction: column;
       gap: 24px;
@@ -266,16 +294,6 @@ const slides = [
       gap: 16px;
     }
 
-    &__amount {
-      background: #F2F5F9;
-      color: #828EAD;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 700;
-      line-height: 16px;
-      padding: 5px 8px;
-    }
-
     &__switch {
       align-items: center;
       color: #071435;
@@ -293,6 +311,7 @@ const slides = [
     }
 
     &__info {
+      align-items: center;
       display: flex;
       gap: 16px;
     }
@@ -401,6 +420,27 @@ const slides = [
       line-height: 28px;
     }
 
+    &__quantity {
+        align-items: center;
+        background: #FFFFFF;
+        border: 2px solid #1551E5;
+        box-shadow: 0px 0px 6px #BAC4E0;
+        border-radius: 8px;
+        display: flex;
+        gap: 12px;
+        height: 56px;
+        padding: 6px 10px 6px 14px;
+        width: 284px;
+    }
+
+    &__quantity-input {
+      color: #071435;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 24px;
+      text-align: center;
+      width: 184px;
+    }
   }
 
   .price {
@@ -421,7 +461,7 @@ const slides = [
         gap: 16px;
       }
 
-        &__sum {
+       &__sum {
           color: #071435;
           font-size: 32px;
           line-height: 22px;
@@ -438,59 +478,59 @@ const slides = [
           line-height: 20px;
           padding: 2px 8px;
         }
-  }
+    }
 
-  .switch {
-      height: 24px;
-      position: relative;
-      width: 40px;
+.switch {
+    height: 24px;
+    position: relative;
+    width: 40px;
 
-      input {
-          display: none;
+    input {
+        display: none;
 
-          &:checked + .switch__slider {
-              background: #1551E5;
-          }
+        &:checked + .switch__slider {
+            background: #1551E5;
+        }
 
-          &:focus + .switch__slider {
-            box-shadow: 0 0 1px #1551E5;
-          }
+        &:focus + .switch__slider {
+          box-shadow: 0 0 1px #1551E5;
+        }
 
-          &:checked + .switch__slider:before {
-              transform: translateX(16px);
-          }
-      }
+        &:checked + .switch__slider:before {
+            transform: translateX(16px);
+        }
+    }
 
-      &__slider {
-        background: #CCCCCC;
-        bottom: 0;
-        cursor: pointer;
-        left: 0;
+    &__slider {
+      background: #CCCCCC;
+      bottom: 0;
+      cursor: pointer;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      transition: .3s;
+
+      &:before {
+        background: #FFFFFF;
+        bottom: 2px;
+        content: "";
+        height: 20px;
+        left: 2px;
         position: absolute;
-        right: 0;
-        top: 0;
         transition: .3s;
-
-        &:before {
-          background: #FFFFFF;
-          bottom: 2px;
-          content: "";
-          height: 20px;
-          left: 2px;
-          position: absolute;
-          transition: .3s;
-          width: 20px;
-        }
+        width: 20px;
       }
+    }
 
-      .round {
-        border-radius: 32px;
+    .round {
+      border-radius: 32px;
 
-        &:before {
-          border-radius: 50%;
-        }
+      &:before {
+        border-radius: 50%;
       }
-  }
+    }
+}
 
   .slider {
       background: #F2F5F9;
@@ -498,42 +538,64 @@ const slides = [
       display: flex;
       overflow: hidden;
 
-      &__item {
-        height: 400px;
-        width: 400px;
+    &__item {
+      width: 100%;
+      height: 100%;
+    }
+}
 
-        img {
-          height: 100%;
-          object-fit: contain;
-          width: 100%;
-        }
-      }
-  }
+.slider-navigation {
+  width: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
-  .slider-navigation {
-    align-items: center;
+    &__wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+
+    button {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+
+    img {
+      width: 40px;
+      height: 40px;
+      margin: 0 10px;
+    }
+}
+
+.article {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 24px;
+  max-height: 294px;
+
+  &__item {
     display: flex;
-    gap: 16px;
-
-      &__wrapper {
-        align-items: center;
-        display: flex;
-        gap: 12px;
-        justify-content: center;
-        width: 100%;
-      }
-
-      &__item {
-        border-radius: 16px;
-        height: 64px;
-        overflow: hidden;
-        width: 64px;
-      }
-
-      img {
-          height: 100%;
-          object-fit: contain;
-          width: 100%;
-      }
+    flex-direction: column;
+    gap: 8px;
+    height: 44px;
   }
+
+  &__title {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 16px;
+    color: #071435;
+  }
+
+  &__subtitle {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    color: #828EAD;
+  }
+}
 </style>
