@@ -10,8 +10,14 @@ import 'swiper/css/pagination'
 import { ref } from 'vue'
 
 const swiper = ref<typeof Swiper | null>(null)
+const thumbsSwiper = ref<typeof Swiper | null>(null)
+
 const isEnabled = ref(false)
 const amount = ref(0)
+
+function setThumbsSwiper(instance) {
+  thumbsSwiper.value = instance
+}
 
 function onSwiper(instance) {
   swiper.value = instance
@@ -96,6 +102,14 @@ const slides = [
     img: '/public/slider-1.png',
     id: 3,
   },
+  {
+    img: '/public/slider-1.png',
+    id: 4,
+  },
+  {
+    img: '/public/slider-1.png',
+    id: 5,
+  },
 ]
 </script>
 
@@ -114,6 +128,9 @@ const slides = [
           :navigation="{ nextEl: '.swiper-button-prev', prevEl: '.swiper-button-prev' }"
           :pagination="{ clickable: true }"
           :space-between="50"
+          :loop="true"
+          :modules="Thumbs"
+          :thumbs="{ swiper: thumbsSwiper }"
           class="js-slider"
           @swiper="onSwiper"
         >
@@ -124,11 +141,11 @@ const slides = [
       </div>
       <div class="slider-navigation">
         <button aria-label="" class="button button--lightblue button--prev" @click="slidePrev()" />
-        <div class="slider-navigation__wrapper">
-          <button v-for="(item, index) in slides" :key="item.id" aria-label="" class="slider-navigation__item" @click="slideToIndex(index)">
+        <Swiper class="slider-navigation__wrapper" :slides-per-view="4" watch-slides-progress :modules="Thumbs" @swiper="setThumbsSwiper">
+          <SwiperSlide v-for="(item, index) in slides" :key="item.id" aria-label="" class="slider-navigation__item" @click="slideToIndex(index)">
             <img alt="" height="" :src="item.img" width="">
-          </button>
-        </div>
+          </SwiperSlide>
+        </Swiper>
         <button aria-label="" class="button button--lightblue button--next" @click="slideNext()" />
       </div>
     </div>
@@ -570,6 +587,7 @@ const slides = [
         height: 64px;
         overflow: hidden;
         width: 64px;
+        cursor: pointer;
       }
 
       img {
