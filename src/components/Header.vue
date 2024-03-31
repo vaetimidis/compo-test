@@ -1,146 +1,243 @@
 <template>
   <header class="header">
     <div class="header__top">
-      <div class="logo">
-        <img class="logo__img" src="/public/logo.svg" alt="logo">
-      </div>
-      <button class="button button--menu button--blue">
-        <span>Меню</span>
+      <a class="logo" href="javascript:void(0);" title="">
+        <img alt="" height="" src="/public/logo.svg" width="">
+      </a>
+      <button class="button button--blue button--menu">
+        Меню
       </button>
-      <div class="search">
-        <form class="form">
-          <div class="input">
-            <input id="" aria-label="Поиск" class="input__field" inputmode="text" name="" placeholder="Поиск по сайту" type="text">
-            <div class="search__buttons">
-              <button type="button" class="search__button cross" />
-              <button type="submit" class="search__button find" />
-            </div>
-          </div>
-        </form>
-      </div>
-      <div class="header-buttons">
-        <div class="header-buttons__item">
-          <a href="" class="header-buttons__link">
-            <img class="header-buttons__img" src="/public/notification.svg" alt="">
-          </a>
+      <form class="search">
+        <div class="search__input">
+          <input id="form_text" aria-label="Поиск" inputmode="text" name="form_text" placeholder="Название запроса" type="text">
+          <button aria-label="Отмена" type="button" class="search__button search__button--cross" />
+          <button aria-label="Поиск" type="submit" class="search__button search__button--find" />
         </div>
-        <div class="header-buttons__item">
-          <a href="" class="header-buttons__link favorite">
-            <img class="header-buttons__img" src="/public/favorite.svg" alt="">
-          </a>
-        </div>
-      </div>
+      </form>
+      <a class="button button--icon button--notification" href="javascript:void(0);" title="" />
+      <div class="header__line" />
+      <a class="button button--icon button--favorite" href="javascript:void(0);" title="" />
       <button class="button button--lightblue button--cart">
-        <span class="button__text button__text--cart">144 155₽</span>
+        144 155₽
       </button>
-      <div class="info">
-        <div class="avatar">
-          <img class="avatar__img" src="/public/avatar.svg" alt="avatar">
+      <a class="header__info" href="javascript:void(0);" title="">
+        <div class="header__info-avatar">
+          <img alt="" height="" src="/public/Avatar.png" width="">
         </div>
-        <span class="name">Ермаков Е.</span>
-        <button class="info__menu" />
-      </div>
+        Ермаков Е.
+      </a>
     </div>
     <div class="header__bottom">
-      <div class="navigation navigation--left">
-        <a class="navigation__item">Мои заказы</a>
-        <a class="navigation__item">Сотрудники</a>
-        <a class="navigation__item">Шаблоны заказов</a>
-        <a class="navigation__item">Обращения</a>
-      </div>
-      <div class="navigation navigation--right">
-        <a class="button button--lightblue button--manager">
-          Ваш менеджер
-        </a>
-        <a class="button button--white button--discount">
-          Акции
-        </a>
-        <a class="navigation__item navigation__item--blue">
-          Блог
-        </a>
+      <nav class="navigation">
+        <a class="navigation__link" href="javascript:void(0);" title="">Мои заказы</a>
+        <a class="navigation__link" href="javascript:void(0);" title="">Сотрудники</a>
+        <a class="navigation__link" href="javascript:void(0);" title="">Шаблоны заказов</a>
+        <a class="navigation__link" href="javascript:void(0);" title="">Обращения</a>
+      </nav>
+      <div class="header__links">
+        <a class="header__link header__link--manager" href="javascript:void(0);" title="">Ваш менеджер</a>
+        <a class="header__link header__link--special" href="javascript:void(0);" title="">Акции</a>
+        <a class="header__link" href="javascript:void(0);" title="">Блог</a>
       </div>
     </div>
   </header>
 </template>
 
 <style lang="scss" scoped>
+button,
+input {
+  outline: none;
+}
+
 .header {
+  box-shadow: 0 4px 8px -16px #F0F3FC;
+
+  &__top {
+    align-items: center;
+    border-bottom: 1px solid #E1E5EB;
     display: flex;
-    flex-direction: column;
-    height: 136px;
+    gap: 24px;
+    padding: 16px 24px;
+  }
 
-    &__top {
-      display: flex;
-      flex-direction: row;
-      height: 80px;
-      padding: 16px 24px;
-      gap: 24px;
-      border-bottom: 1px solid #E1E5EB;
+  &__bottom {
+    border-bottom: 1px solid #E1E5EB;
+    display: flex;
+    gap: 16px;
+    padding: 12px 24px;
+  }
 
+  &__info {
+    align-items: center;
+    color: #071435;
+    display: flex;
+    font-size: 14px;
+    font-weight: 400;
+    gap: 16px;
+    line-height: 16px;
+    text-decoration: none;
+    transition: opacity .3s;
+
+    @media (hover: none), (pointer: coarse) {
+      &:active {
+        opacity: .7;
+      }
     }
 
-    &__bottom {
-      display: flex;
-      flex-direction: row;
-      height: 56px;
-      padding: 12px 24px;
-      gap: 16px;
-      border-bottom: 1px solid #E1E5EB;
+    @media not all and (pointer: coarse) {
+      &:hover,
+      &:active {
+        opacity: .7;
+      }
+    }
+
+    &:after {
+      content: url('/public/arrow-down.svg');
+      height: 24px;
+      width: 24px
     }
   }
 
-.logo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 48px;
+  &__info-avatar {
+    height: 32px;
+    width: 32px;
 
-  &__img {
-    width: 144px;
-    height: 28px;
+    img {
+      height: 32px;
+      object-fit: contain;
+      width: 32px;
+    }
+  }
+
+  &__line {
+    background: #E2E4F0;
+    height: 48px;
+    width: 1px;
+  }
+
+  &__links {
+    align-items: center;
+    display: flex;
+    gap: 24px;
+  }
+
+  &__link {
+    align-items: center;
+    display: flex;
+    color: #1551E5;
+    font-size: 14px;
+    font-weight: 400;
+    gap: 8px;
+    line-height: 16px;
+    text-decoration: none;
+    transition: opacity .3s;
+
+    @media (hover: none), (pointer: coarse) {
+      &:active {
+        opacity: .7;
+      }
+    }
+
+    @media not all and (pointer: coarse) {
+      &:hover,
+      &:active {
+        opacity: .7;
+      }
+    }
+
+    &--manager {
+      background: #F2F6FF;
+      border-radius: 4px;
+      padding: 8px 12px;
+
+      &:before {
+        content: url('/public/chat.svg');
+        width: 16px;
+        height: 16px
+      }
+    }
+
+    &--special {
+      &:before {
+        content: url('/public/discount.svg');
+        height: 16px;
+        width: 16px;
+      }
+    }
+  }
+}
+
+.logo {
+  display: block;
+  /* flex: none; */
+  height: 48px;
+  transition: opacity .3s;
+  width: 144px;
+
+  @media (hover: none), (pointer: coarse) {
+    &:active {
+      opacity: .7;
+    }
+  }
+
+  @media not all and (pointer: coarse) {
+    &:hover,
+    &:active {
+      opacity: .7;
+    }
+  }
+
+  img {
+    height: 100%;
+    object-fit: contain;
+    width: 100%;
   }
 }
 
 .button {
-  display: flex;
-  flex-direction: row;
   align-items: center;
-  justify-content: center;
-
   border-radius: 8px;
+  display: flex;
+  font-size: 14px;
+  font-weight: 700;
   gap: 12px;
-  padding: 12px 24px;
-
-  color: #fff;
-
-  &__text{
+  justify-content: center;
   line-height: 16px;
+  padding: 12px 24px;
+  transition: opacity .3s;
 
-  &--cart {
-    color: #1551E5;
-    font-size: 14px;
-    font-weight: 700;
+  @media (hover: none), (pointer: coarse) {
+    &:active {
+      opacity: .7;
+    }
   }
-}
+
+  @media not all and (pointer: coarse) {
+    &:hover,
+    &:active {
+      opacity: .7;
+    }
+  }
 
   &--blue {
-    background-color: #1551E5;
-    height: 48px;
+    background: #1551E5;
+    color: #FFFFFF;
   }
 
   &--lightblue {
-    background-color: #F2F6FF;
+    background: #F2F6FF;
+    color: #1551E5;
   }
 
-  &--menu::before {
-    content: url('/public/menu.svg');
-    width: 24px;
-    height: 24px;
+  &--menu {
+    &:before {
+      content: url('/public/menu.svg');
+      height: 24px;
+      width: 24px;
+    }
   }
 
   &--cart {
-    height: 48px;
-
     &::before {
       content: url('/public/cart.svg');
       width: 24px;
@@ -148,170 +245,135 @@
     }
   }
 
-  &--manager {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 16px;
-    color: #1551E5;
-    gap: 8px;
-    padding: 8px 12px;
+  &--icon {
+    border-radius: 0;
     height: 32px;
-    border-radius: 4px;
+    padding: 0;
+    width: 32px;
+  }
 
-    &::before {
-      content: url('/public/chat.svg');
-      width: 16px;
-      height: 16px
+  &--notification {
+    &:before {
+      content: url('/public/notification.svg');
+      height: 32px;
+      width: 32px;
     }
   }
 
-  &--white {
-    background-color: #fff;
-  }
-
-  &--discount {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 16px;
-    color: #1551E5;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-
-    &::before {
-      content: url('/public/discount.svg');
-      height: 16px;
-      width: 16px;
+  &--favorite {
+    &:before {
+      content: url('/public/favorite.svg');
+      height: 32px;
+      width: 32px;
     }
   }
 }
 
 .search {
+  background: #FFFFFF;
+  border: 1px solid #E1E5EB;
+  border-radius: 8px;
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  height: 48px;
+  flex-grow: 1;
+  padding: 6px 10px 6px 14px;
 
-  &__buttons {
+  &__input {
+    align-items: center;
     display: flex;
-    flex-direction: row;
+    font-size: 14px;
+    font-weight: 400;
     gap: 12px;
+    line-height: 16px;
+    width: 100%;
+
+    input {
+      flex-grow: 1;
+
+      &[placeholder] {
+          text-overflow: ellipsis;
+      }
+
+      &::-webkit-input-placeholder {
+        color: #050D23;
+      }
+
+      &:-moz-placeholder {
+        color: #050D23;
+      }
+
+      &::-moz-placeholder {
+        color: #050D23;
+      }
+
+      &:-ms-input-placeholder {
+        color: #050D23;
+      }
+    }
   }
 
   &__button {
     display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .cross::before {
-    content: url('/public/cross.svg');
     height: 24px;
+    transition: opacity .3s;
     width: 24px;
-  }
 
-  .find::before {
-    content: url('/public/search.svg');
-    height: 24px;
-    width: 24px;
-  }
+    @media (hover: none), (pointer: coarse) {
+      &:active {
+        opacity: .7;
+      }
+    }
 
-}
+    @media not all and (pointer: coarse) {
+      &:hover,
+      &:active {
+        opacity: .7;
+      }
+    }
 
-.input {
-  width: 100%;
-  height: 48px;
-
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-
-  border: 1px solid #E1E5EB;
-  border-radius: 8px;
-  padding: 8px 12px 8px 16px;
-
-  &__field {
-    background-color: transparent;
-    border: none;
-  }
-}
-
-.header-buttons {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  height: 48px;
-
-  &__item {
-    padding: 0 24px;
-  }
-
-  &__link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  &__img {
-    width: 32px;
-    height: 32px;
-  }
-}
-
-.info {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  height: 48px;
-
-  &__menu {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    &::before {
-      content: url('/public/arrow-down.svg');
+    &:before {
       height: 24px;
-      width: 24px
+      width: 24px;
+    }
+
+    &--cross {
+      &:before {
+        content: url('/public/cross.svg');
+      }
+    }
+
+    &--find {
+      &:before {
+        content: url('/public/search.svg');
+      }
     }
   }
 }
 
-.avatar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  &__img {
-    width: 32px;
-    height: 32px;
-  }
-}
-
 .navigation {
-  display: flex;
-  flex-direction: row;
   align-items: center;
+  display: flex;
+  flex-grow: 1;
   gap: 24px;
 
-  &--right {
-    margin-left: auto;
-    color: #1551E5;
-  }
-
-  &__item {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 16px;
+  &__link {
     color: #071435;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    text-decoration: none;
+    transition: opacity .3s;
 
-    &--blue {
-      color: #1551E5;
+    @media (hover: none), (pointer: coarse) {
+      &:active {
+        opacity: .7;
+      }
+    }
+
+    @media not all and (pointer: coarse) {
+      &:hover,
+      &:active {
+        opacity: .7;
+      }
     }
   }
 }
