@@ -147,7 +147,7 @@ const links = ref([
         Настоящая Политика обработки персональных данных разработана в соответствии с Конституцией Российской Федерации, Трудовым кодексом Российской Федерации, Гражданским кодексом Российской Федерации, Федеральным законом от 27 июля 2006 года 149-ФЗ "Об информации, информационных технологиях и о защите информации",
       </div>
       <div class="footer__copyright">
-        <div class="logo--copy">
+        <div class="logo logo--copy">
           <img alt="" height="" src="/public/logo-gray.svg" width="">
         </div>
         Разработка платформы
@@ -386,74 +386,6 @@ const links = ref([
         opacity: .7;
       }
     }
-  }
-}
-
-/* убрать */
-.logo {
-  display: block;
-  height: 28px;
-  transition: opacity .3s;
-  width: 144px;
-
-  @media (hover: none), (pointer: coarse) {
-    &:active {
-      opacity: .7;
-    }
-  }
-
-  @media not all and (pointer: coarse) {
-    &:hover,
-    &:active {
-      opacity: .7;
-    }
-  }
-
-  img {
-    height: 100%;
-    object-fit: contain;
-    width: 100%;
-  }
-
-  &--footer {
-    height: 40px;
-    width: 192px;
-  }
-
-  &--copy {
-    height: 24px;
-    width: 124px;
-  }
-}
-/* убрать */
-.button {
-  align-items: center;
-  border-radius: 8px;
-  display: flex;
-  font-size: 14px;
-  font-weight: 700;
-  gap: 12px;
-  justify-content: center;
-  line-height: 16px;
-  padding: 12px 24px;
-  transition: opacity .3s;
-
-  @media (hover: none), (pointer: coarse) {
-    &:active {
-      opacity: .7;
-    }
-  }
-
-  @media not all and (pointer: coarse) {
-    &:hover,
-    &:active {
-      opacity: .7;
-    }
-  }
-
-  &--lightblue {
-    background: #F2F6FF;
-    color: #1551E5;
   }
 }
 </style>

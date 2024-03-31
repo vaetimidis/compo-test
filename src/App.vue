@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import './assets/styles/index'
+
 import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
 import Breadcrumbs from './components/Breadcrumbs.vue'

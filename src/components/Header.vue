@@ -1,11 +1,9 @@
-<script>
-import Logo from '../components/Logo.vue'
-</script>
-
 <template>
   <header class="header">
     <div class="header__top">
-      <Logo />
+      <div class="logo logo--copy">
+        <img alt="" height="" src="/public/logo.svg" width="">
+      </div>
       <button class="button button--blue button--menu">
         Меню
       </button>
@@ -167,109 +165,6 @@ input {
     img {
       height: 32px;
       object-fit: contain;
-      width: 32px;
-    }
-  }
-}
-
-.logo {
-  display: block;
-  height: 28px;
-  transition: opacity .3s;
-  width: 144px;
-
-  @media (hover: none), (pointer: coarse) {
-    &:active {
-      opacity: .7;
-    }
-  }
-
-  @media not all and (pointer: coarse) {
-    &:hover,
-    &:active {
-      opacity: .7;
-    }
-  }
-
-  img {
-    height: 100%;
-    object-fit: contain;
-    width: 100%;
-  }
-}
-
-.button {
-  align-items: center;
-  border-radius: 8px;
-  display: flex;
-  font-size: 14px;
-  font-weight: 700;
-  gap: 12px;
-  justify-content: center;
-  line-height: 16px;
-  padding: 12px 24px;
-  transition: opacity .3s;
-
-  @media (hover: none), (pointer: coarse) {
-    &:active {
-      opacity: .7;
-    }
-  }
-
-  @media not all and (pointer: coarse) {
-    &:hover,
-    &:active {
-      opacity: .7;
-    }
-  }
-
-  &--blue {
-    background: #1551E5;
-    color: #FFFFFF;
-  }
-
-  &--lightblue {
-    background: #F2F6FF;
-    color: #1551E5;
-  }
-
-  &--menu {
-    &:before {
-      content: url('/public/menu.svg');
-      height: 24px;
-      width: 24px;
-    }
-  }
-
-  &--cart {
-    text-decoration: none;
-
-    &::before {
-      content: url('/public/cart.svg');
-      width: 24px;
-      height: 24px;
-    }
-  }
-
-  &--icon {
-    border-radius: 0;
-    height: 32px;
-    padding: 0;
-    width: 32px;
-  }
-
-  &--notification {
-    &:before {
-      content: url('/public/notification.svg');
-      height: 32px;
-      width: 32px;
-    }
-  }
-
-  &--favorite {
-    &:before {
-      content: url('/public/favorite.svg');
-      height: 32px;
       width: 32px;
     }
   }
