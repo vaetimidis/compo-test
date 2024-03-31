@@ -48,37 +48,37 @@ function decrease() {
 const articles = [
   {
     title: 'ELC00696',
-    subtitle: 'Код поставщика',
+    text: 'Код поставщика',
     id: 1,
   },
   {
     title: 'ELC00696',
-    subtitle: 'Код РАЭК',
+    text: 'Код РАЭК',
     id: 2,
   },
   {
     title: 'Electric used',
-    subtitle: 'Бренд',
+    text: 'Бренд',
     id: 3,
   },
   {
     title: 'ELC0200000696',
-    subtitle: 'Код производителя',
+    text: 'Код производителя',
     id: 4,
   },
   {
     title: 'ELC0200000696',
-    subtitle: 'Артикул',
+    text: 'Артикул',
     id: 5,
   },
   {
     title: 'ELC00696',
-    subtitle: 'Код ЕТМ',
+    text: 'Код ЕТМ',
     id: 6,
   },
   {
     title: 'ELC00696',
-    subtitle: 'Серия',
+    text: 'Серия',
     id: 7,
   },
 ]
@@ -107,36 +107,29 @@ const slides = [
     </h2>
   </div>
   <div class="card">
-    <div class="card__sliders">
+    <div class="card__slider-cont">
       <div class="slider">
-        <div class="slider__inner">
-          <div class="js-slider">
-            <Swiper
-              :slides-per-view="1"
-              :navigation="{ nextEl: '.swiper-button-prev', prevEl: '.swiper-button-prev' }"
-              :pagination="{ clickable: true }"
-              :space-between="50"
-              @swiper="onSwiper"
-            >
-              <SwiperSlide v-for="item in slides" :key="item.id" class="slider__item">
-                <img :src="item.img" alt="">
-              </SwiperSlide>
-            </Swiper>
-          </div>
-        </div>
+        <Swiper
+          :slides-per-view="1"
+          :navigation="{ nextEl: '.swiper-button-prev', prevEl: '.swiper-button-prev' }"
+          :pagination="{ clickable: true }"
+          :space-between="50"
+          class="js-slider"
+          @swiper="onSwiper"
+        >
+          <SwiperSlide v-for="item in slides" :key="item.id" class="slider__item">
+            <img alt="" height="" :src="item.img" width="">
+          </SwiperSlide>
+        </Swiper>
       </div>
       <div class="slider-navigation">
-        <button class="button-prev" @click="slidePrev()">
-          <img src="/public/icon-left.svg" alt="Previous">
-        </button>
+        <button aria-label="" class="button button--lightblue button--prev" @click="slidePrev()" />
         <div class="slider-navigation__wrapper">
-          <button v-for="(item, index) in slides" :key="item.id" class="slider-navigation__item" @click="slideToIndex(index)">
-            <img :src="item.img" alt="">
+          <button v-for="(item, index) in slides" :key="item.id" aria-label="" class="slider-navigation__item" @click="slideToIndex(index)">
+            <img alt="" height="" :src="item.img" width="">
           </button>
         </div>
-        <button class="button-next" @click="slideNext()">
-          <img src="/public/icon-right.svg" alt="Next">
-        </button>
+        <button aria-label="" class="button button--lightblue button--next" @click="slideNext()" />
       </div>
     </div>
     <div class="card__content">
@@ -208,16 +201,16 @@ const slides = [
         </div>
         <div class="card__line" />
         <div class="card__values">
-          <h4 class="card__title">
+          <h4 class="card__values-title">
             Характеристики
           </h4>
-          <div class="article">
-            <div v-for="item in articles" :key="item.id" class="article__item">
-              <h6 class="article__title">
+          <div class="card__values-list">
+            <div v-for="item in articles" :key="item.id" class="card__values-item">
+              <div class="card__values-item-title">
                 {{ item.title }}
-              </h6>
-              <div lass="article__subtitle">
-                {{ item.subtitle }}
+              </div>
+              <div lass="card__values-item-text">
+                {{ item.text }}
               </div>
             </div>
           </div>
@@ -250,7 +243,7 @@ const slides = [
     text-transform: uppercase;
   }
 
-  .amount {
+    .amount {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -276,7 +269,7 @@ const slides = [
     display: flex;
     gap: 24px;
 
-    &__sliders {
+    &__slider-cont {
       display: flex;
       flex-direction: column;
       gap: 24px;
@@ -347,7 +340,6 @@ const slides = [
     }
 
     &__info {
-      align-items: center;
       display: flex;
       gap: 16px;
     }
@@ -388,7 +380,45 @@ const slides = [
     &__values {
       display: flex;
       flex-direction: column;
+      flex-grow: 1;
       gap: 32px;
+    }
+
+    &__values-title {
+      color: #071435;
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 20px;
+    }
+
+    &__values-list {
+      column-count: 2;
+      column-gap: 32px;
+      max-width: 636px;
+    }
+
+    &__values-item {
+      break-inside: avoid;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 24px;
+      max-width: 302px;
+      page-break-inside: avoid;
+    }
+
+    &__values-item-title {
+      color: #071435;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 16px;
+    }
+
+    &__values-item-text {
+      color: #828EAD;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 16px;
     }
 
     &__title {
@@ -417,6 +447,7 @@ const slides = [
       font-weight: 400;
       line-height: 28px;
     }
+
   }
 
   .price {
@@ -437,7 +468,7 @@ const slides = [
         gap: 16px;
       }
 
-       &__sum {
+        &__sum {
           color: #071435;
           font-size: 32px;
           line-height: 22px;
@@ -454,128 +485,102 @@ const slides = [
           line-height: 20px;
           padding: 2px 8px;
         }
-    }
+  }
 
-.switch {
-    height: 24px;
-    position: relative;
-    width: 40px;
-
-    input {
-        display: none;
-
-        &:checked + .switch__slider {
-            background: #1551E5;
-        }
-
-        &:focus + .switch__slider {
-          box-shadow: 0 0 1px #1551E5;
-        }
-
-        &:checked + .switch__slider:before {
-            transform: translateX(16px);
-        }
-    }
-
-    &__slider {
-      background: #CCCCCC;
-      bottom: 0;
-      cursor: pointer;
-      left: 0;
-      position: absolute;
-      right: 0;
-      top: 0;
-      transition: .3s;
-
-      &:before {
-        background: #FFFFFF;
-        bottom: 2px;
-        content: "";
-        height: 20px;
-        left: 2px;
-        position: absolute;
-        transition: .3s;
-        width: 20px;
-      }
-    }
-
-    .round {
-      border-radius: 32px;
-
-      &:before {
-        border-radius: 50%;
-      }
-    }
-}
-
-.slider {
-    display: flex;
-    max-width: 400px;
-    max-height: 400px;
-
-    &__inner {
-      width: 100%;
-      height: 100%;
-    }
-
-    &__item {
-      width: 100%;
-      height: 100%;
-    }
-}
-
-.slider-navigation {
-  width: 400px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-    &__wrapper {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-    }
-
-    button {
-      background: transparent;
-      border: none;
-      cursor: pointer;
-    }
-
-    img {
+  .switch {
+      height: 24px;
+      position: relative;
       width: 40px;
-      height: 40px;
-      margin: 0 10px;
-    }
-}
 
-.article {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  gap: 24px;
-  max-height: 294px;
+      input {
+          display: none;
 
-  &__item {
+          &:checked + .switch__slider {
+              background: #1551E5;
+          }
+
+          &:focus + .switch__slider {
+            box-shadow: 0 0 1px #1551E5;
+          }
+
+          &:checked + .switch__slider:before {
+              transform: translateX(16px);
+          }
+      }
+
+      &__slider {
+        background: #CCCCCC;
+        bottom: 0;
+        cursor: pointer;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        transition: .3s;
+
+        &:before {
+          background: #FFFFFF;
+          bottom: 2px;
+          content: "";
+          height: 20px;
+          left: 2px;
+          position: absolute;
+          transition: .3s;
+          width: 20px;
+        }
+      }
+
+      .round {
+        border-radius: 32px;
+
+        &:before {
+          border-radius: 50%;
+        }
+      }
+  }
+
+  .slider {
+      background: #F2F5F9;
+      border-radius: 32px;
+      display: flex;
+      overflow: hidden;
+
+      &__item {
+        height: 400px;
+        width: 400px;
+
+        img {
+          height: 100%;
+          object-fit: contain;
+          width: 100%;
+        }
+      }
+  }
+
+  .slider-navigation {
+    align-items: center;
     display: flex;
-    flex-direction: column;
-    gap: 8px;
-    height: 44px;
-  }
+    gap: 16px;
 
-  &__title {
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 16px;
-    color: #071435;
-  }
+      &__wrapper {
+        align-items: center;
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        width: 100%;
+      }
 
-  &__subtitle {
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 16px;
-    color: #828EAD;
+      &__item {
+        border-radius: 16px;
+        height: 64px;
+        overflow: hidden;
+        width: 64px;
+      }
+
+      img {
+          height: 100%;
+          object-fit: contain;
+          width: 100%;
+      }
   }
-}
 </style>

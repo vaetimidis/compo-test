@@ -97,6 +97,27 @@
         }
     }
 
+    &--prev,
+    &--next {
+        padding: 16px 3px;
+    }
+
+    &--prev {
+        &:before {
+            content: url("/public/icon-left.svg");
+            height: 32px;
+            width: 32px;
+        }
+    }
+
+    &--next {
+        &::before {
+            content: url("/public/icon-right.svg");
+            height: 32px;
+            width: 32px;
+        }
+    }
+
     &--card-added {
         width: 284px;
         height: 100%;
