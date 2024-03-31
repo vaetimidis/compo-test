@@ -197,7 +197,7 @@ const slides = [
                 Тарасовка
               </div>
             </div>
-            <div class="card__info__item">
+            <div class="card__info-item">
               <div class="card__info-item-title">
                 7 шт.
               </div>
