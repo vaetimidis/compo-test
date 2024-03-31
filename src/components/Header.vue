@@ -17,15 +17,15 @@
       <a class="button button--icon button--notification" href="javascript:void(0);" title="" />
       <div class="header__line" />
       <a class="button button--icon button--favorite" href="javascript:void(0);" title="" />
-      <button class="button button--lightblue button--cart">
+      <a class="button button--lightblue button--cart" href="javascript:void(0);" title="">
         144 155₽
-      </button>
-      <a class="header__info" href="javascript:void(0);" title="">
+      </a>
+      <button class="header__info">
         <div class="header__info-avatar">
           <img alt="" height="" src="/public/Avatar.png" width="">
         </div>
         Ермаков Е.
-      </a>
+      </button>
     </div>
     <div class="header__bottom">
       <nav class="navigation">
@@ -61,52 +61,11 @@ input {
   }
 
   &__bottom {
+    align-items: center;
     border-bottom: 1px solid #E1E5EB;
     display: flex;
     gap: 16px;
     padding: 12px 24px;
-  }
-
-  &__info {
-    align-items: center;
-    color: #071435;
-    display: flex;
-    font-size: 14px;
-    font-weight: 400;
-    gap: 16px;
-    line-height: 16px;
-    text-decoration: none;
-    transition: opacity .3s;
-
-    @media (hover: none), (pointer: coarse) {
-      &:active {
-        opacity: .7;
-      }
-    }
-
-    @media not all and (pointer: coarse) {
-      &:hover,
-      &:active {
-        opacity: .7;
-      }
-    }
-
-    &:after {
-      content: url('/public/arrow-down.svg');
-      height: 24px;
-      width: 24px
-    }
-  }
-
-  &__info-avatar {
-    height: 32px;
-    width: 32px;
-
-    img {
-      height: 32px;
-      object-fit: contain;
-      width: 32px;
-    }
   }
 
   &__line {
@@ -163,6 +122,50 @@ input {
         height: 16px;
         width: 16px;
       }
+    }
+  }
+
+  &__info {
+    align-items: center;
+    color: #071435;
+    display: flex;
+    font-size: 14px;
+    font-weight: 400;
+    gap: 16px;
+    line-height: 16px;
+    text-decoration: none;
+    transition: opacity .3s;
+
+    @media (hover: none), (pointer: coarse) {
+      &:active {
+        opacity: .7;
+      }
+    }
+
+    @media not all and (pointer: coarse) {
+      &:hover,
+      &:active {
+        opacity: .7;
+      }
+    }
+
+    &:after {
+      content: url('/public/arrow-down.svg');
+      height: 24px;
+      width: 24px
+    }
+  }
+
+  &__info-avatar {
+    border-radius: 8px;
+    height: 32px;
+    overflow: hidden;
+    width: 32px;
+
+    img {
+      height: 32px;
+      object-fit: contain;
+      width: 32px;
     }
   }
 }
@@ -238,6 +241,8 @@ input {
   }
 
   &--cart {
+    text-decoration: none;
+
     &::before {
       content: url('/public/cart.svg');
       width: 24px;
