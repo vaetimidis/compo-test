@@ -10,6 +10,8 @@ import 'swiper/css/pagination'
 import { ref } from 'vue'
 
 const swiper = ref<typeof Swiper | null>(null)
+const isEnabled = ref(false)
+const amount = ref(0)
 
 function onSwiper(instance) {
   swiper.value = instance
@@ -28,6 +30,19 @@ function slidePrev() {
 function slideToIndex(index) {
   if (swiper.value)
     swiper.value.slideTo(index)
+}
+
+function increase() {
+  amount.value += 1
+
+  isEnabled.value = true
+}
+
+function decrease() {
+  amount.value -= 1
+
+  if (amount.value === 0)
+    isEnabled.value = false
 }
 
 const articles = [
@@ -176,9 +191,18 @@ const slides = [
             </div>
           </div>
           <div class="card__buttons">
-            <button class="button button--blue button--card-cart">
+            <button v-if="!isEnabled" class="button button--blue button--card-cart" @click="increase">
               В корзину
             </button>
+            <div v-else class="button--card-added">
+              <button class="minus" @click="decrease">
+                <img src="/public/minus.svg" alt="">
+              </button>
+              <span class="amount">{{ amount }} штук</span>
+              <button class="plus" @click="increase">
+                <img src="/public/plus.svg" alt="">
+              </button>
+            </div>
             <button aria-label="" class="button button--lightblue button--card-favorite" />
           </div>
         </div>
@@ -224,6 +248,28 @@ const slides = [
     font-weight: 400;
     line-height: 32px;
     text-transform: uppercase;
+  }
+
+  .amount {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    width: 184px;
+  }
+
+  .minus, .plus {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: 24px;
+      height: 24px;
+    }
   }
 
   .card {
