@@ -4,19 +4,27 @@ import { Swiper, SwiperSlide, useSwiper } from 'swiper/vue'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
+import { ref } from 'vue'
 
-const swiper = useSwiper()
+const swiper = ref<typeof Swiper | null>(null)
+
+function onSwiper(instance: typeof Swiper) {
+  swiper.value = instance
+}
 
 function slideNext() {
-  swiper.value.slideNext()
+  if (swiper.value)
+    swiper.value.slideNext()
 }
 
 function slidePrev() {
-  swiper.value.slidePrev()
+  if (swiper.value)
+    swiper.value.slidePrev()
 }
 
 function slideToIndex(index) {
-  swiper.value.slideTo(index)
+  if (swiper.value)
+    swiper.value.slideTo(index)
 }
 
 const articles = [
@@ -87,6 +95,7 @@ const slides = [
               :navigation="{ nextEl: '.swiper-button-prev', prevEl: '.swiper-button-prev' }"
               :pagination="{ clickable: true }"
               :space-between="50"
+              @swiper="onSwiper"
             >
               <SwiperSlide v-for="item in slides" :key="item.id" class="slider__item">
                 <img :src="item.img" alt="">
