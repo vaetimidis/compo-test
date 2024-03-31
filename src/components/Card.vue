@@ -1,4 +1,24 @@
 <script setup lang="ts">
+import { Swiper, SwiperSlide, useSwiper } from 'swiper/vue'
+
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+
+const swiper = useSwiper()
+
+function slideNext() {
+  swiper.value.slideNext()
+}
+
+function slidePrev() {
+  swiper.value.slidePrev()
+}
+
+function slideToIndex(index) {
+  swiper.value.slideTo(index)
+}
+
 const articles = [
   {
     title: 'ELC00696',
@@ -36,6 +56,21 @@ const articles = [
     id: 7,
   },
 ]
+
+const slides = [
+  {
+    img: '/public/slider-1.png',
+    id: 1,
+  },
+  {
+    img: '/public/slider-1.png',
+    id: 2,
+  },
+  {
+    img: '/public/slider-1.png',
+    id: 3,
+  },
+]
 </script>
 
 <template>
@@ -43,8 +78,36 @@ const articles = [
     Кроссовки мужские Skechers Sunny Dale
   </h1>
   <div class="card">
-    <div class="card__slider">
-      asd
+    <div class="card__sliders">
+      <div class="slider">
+        <div class="slider__inner">
+          <div class="js-slider">
+            <Swiper
+              :slides-per-view="1"
+              :navigation="{ nextEl: '.swiper-button-prev', prevEl: '.swiper-button-prev' }"
+              :pagination="{ clickable: true }"
+              :space-between="50"
+            >
+              <SwiperSlide v-for="item in slides" :key="item.id" class="slider__item">
+                <img :src="item.img" alt="">
+              </SwiperSlide>
+            </Swiper>
+          </div>
+        </div>
+      </div>
+      <div class="slider-navigation">
+        <button class="swiper-button-prev" @click="slidePrev()">
+          <img src="" alt="Previous">
+        </button>
+        <div class="slider-navigation__wrapper">
+          <button v-for="(item, index) in slides" :key="item.id" @click="slideToIndex(index)">
+            <img :src="item.img" alt="">
+          </button>
+        </div>
+        <button class="swiper-button-next" @click="slideNext()">
+          <img src="" alt="Next">
+        </button>
+      </div>
     </div>
     <div class="card__content">
       <div class="characteristics">
@@ -131,6 +194,32 @@ const articles = [
 </template>
 
 <style scoped lang="scss">
+    .slider-navigation {
+      width: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+        &__wrapper {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+        }
+
+        button {
+          background: transparent;
+          border: none;
+          cursor: pointer;
+        }
+
+        img {
+          width: 40px;
+          height: 40px;
+          margin: 0 10px;
+        }
+    }
+
     .title {
         font-weight: 400;
         font-size: 32px;
@@ -138,15 +227,25 @@ const articles = [
         margin: 24px 0 32px
     }
 
+    .slider {
+        display: flex;
+        max-width: 400px;
+        max-height: 400px;
+
+        &__inner {
+          width: 100%;
+          height: 100%;
+        }
+
+        &__item {
+          width: 100%;
+          height: 100%;
+        }
+    }
+
     .card {
         display: flex;
         flex-direction: row;
-
-        &__slider {
-            display: flex;
-            min-width: 400px;
-            border: 0.5px solid black;
-        }
 
         &__content {
             display: flex;
@@ -173,6 +272,12 @@ const articles = [
           font-size: 18px;
           line-height: 28px;
           color: #071435;
+        }
+
+        &__sliders {
+          display: flex;
+          flex-direction: column;
+          gap: 24px;
         }
     }
 

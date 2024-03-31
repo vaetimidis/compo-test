@@ -1,9 +1,11 @@
+<script>
+import Logo from '../components/Logo.vue'
+</script>
+
 <template>
   <header class="header">
     <div class="header__top">
-      <a class="logo" href="javascript:void(0);" title="">
-        <img alt="" height="" src="/public/logo.svg" width="">
-      </a>
+      <Logo />
       <button class="button button--blue button--menu">
         Меню
       </button>
@@ -172,8 +174,7 @@ input {
 
 .logo {
   display: block;
-  /* flex: none; */
-  height: 48px;
+  height: 28px;
   transition: opacity .3s;
   width: 144px;
 
