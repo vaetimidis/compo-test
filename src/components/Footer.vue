@@ -1,23 +1,29 @@
+<!-- eslint-disable vue/valid-v-for -->
 <script setup lang="ts">
-  import {ref} from 'vue'
+import { ref } from 'vue'
 
-  const links = ref([
-    {
-      title: 'Женщинам',
-      items: ['Одежда', 'Обувь', 'Аксессуары', 'Белье', 'Bra fitting']
-    },
-    {
-      title: 'Мужчинам',
-      items: ['Одежда', 'Обувь', 'Аксессуары', 'Белье']
-    },
-    {
-      title: 'Детям',
-      items: ['Одежда', 'Обувь', 'Аксессуары', 'Белье', 'Игрушки', 'Малыши']
-    },
-    {
-      title: 'Виды спорта',
-      items: ['Велоспорт', 'Туризм', 'Тренажеры и фитнес', 'Командные виды спорта', 'Самокаты']
-    }])
+const links = ref([
+  {
+    title: 'Женщинам',
+    items: ['Одежда', 'Обувь', 'Аксессуары', 'Белье', 'Bra fitting'],
+    id: 1,
+  },
+  {
+    title: 'Мужчинам',
+    items: ['Одежда', 'Обувь', 'Аксессуары', 'Белье'],
+    id: 2,
+  },
+  {
+    title: 'Детям',
+    items: ['Одежда', 'Обувь', 'Аксессуары', 'Белье', 'Игрушки', 'Малыши'],
+    id: 3,
+  },
+  {
+    title: 'Виды спорта',
+    items: ['Велоспорт', 'Туризм', 'Тренажеры и фитнес', 'Командные виды спорта', 'Самокаты'],
+    id: 4,
+  },
+])
 </script>
 
 <template>
@@ -52,9 +58,9 @@
       </div>
     </div>
     <div class="footer__main catalog">
-      <div v-for="item in links" class="catalog__item">
+      <div v-for="item in links" :key="item.id" class="catalog__item">
         <div class="menu-header">
-          {{item.title}}
+          {{ item.title }}
         </div>
         <ul class="menu">
           <li v-for="link in item.items" class="menu__item">
