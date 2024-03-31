@@ -27,16 +27,25 @@ function onSwiper(instance) {
 function slideNext() {
   if (swiper.value)
     swiper.value.slideNext()
+
+  if (thumbsSwiper.value)
+    thumbsSwiper.value.slideNext()
 }
 
 function slidePrev() {
   if (swiper.value)
     swiper.value.slidePrev()
+
+  if (thumbsSwiper.value)
+    thumbsSwiper.value.slidePrev()
 }
 
 function slideToIndex(index) {
   if (swiper.value)
-    swiper.value.slideToLoop(index)
+    swiper.value.slideTo(index)
+
+  if (thumbsSwiper.value)
+    thumbsSwiper.value.slideTo(index)
 }
 
 function increase() {
@@ -588,12 +597,21 @@ const slides = [
         overflow: hidden;
         width: 64px;
         cursor: pointer;
+        position: relative;
       }
 
       img {
           height: 100%;
           object-fit: contain;
           width: 100%;
+      }
+
+      .swiper-slide-thumb-active  {
+
+          border: 0.5px solid #1551E5;
+          width: 100%;
+          height: 100%;
+
       }
   }
 </style>
