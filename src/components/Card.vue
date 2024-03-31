@@ -2,12 +2,13 @@
 <script setup lang="ts">
 import Breadcrumbs from './Breadcrumbs.vue'
 
+import { computed, ref } from 'vue'
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/vue'
+import { Thumbs } from 'swiper/modules'
 
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
-import { ref } from 'vue'
 
 const swiper = ref<typeof Swiper | null>(null)
 const thumbsSwiper = ref<typeof Swiper | null>(null)
@@ -24,24 +25,18 @@ function onSwiper(instance) {
 }
 
 function slideNext() {
-  if (swiper.value) {
+  if (swiper.value)
     swiper.value.slideNext()
-    thumbsSwiper.value.slideNext()
-  }
 }
 
 function slidePrev() {
-  if (swiper.value) {
+  if (swiper.value)
     swiper.value.slidePrev()
-    thumbsSwiper.value.slidePrev()
-  }
 }
 
 function slideToIndex(index) {
-  if (swiper.value) {
+  if (swiper.value)
     swiper.value.slideToLoop(index)
-    thumbsSwiper.value.slideTo(index)
-  }
 }
 
 function increase() {
@@ -133,8 +128,9 @@ const slides = [
           :slides-per-view="1"
           :navigation="{ nextEl: '.swiper-button-prev', prevEl: '.swiper-button-prev' }"
           :pagination="{ clickable: true }"
+          :thumbs="{ swiper: thumbsSwiper }"
           :space-between="50"
-          :modules="Thumbs"
+          :modules="[Thumbs]"
           class="js-slider"
           @swiper="onSwiper"
         >
@@ -145,7 +141,7 @@ const slides = [
       </div>
       <div class="slider-navigation">
         <button aria-label="" class="button button--lightblue button--prev" @click="slidePrev()" />
-        <Swiper class="slider-navigation__wrapper" :slides-per-view="4" watch-slides-progress :modules="Thumbs" :navigation="{ nextEl: '.swiper-button-prev', prevEl: '.swiper-button-prev' }" @swiper="setThumbsSwiper">
+        <Swiper class="slider-navigation__wrapper" :slides-per-view="4" :watch-slides-progress="true" :free-mode="true" @swiper="setThumbsSwiper">
           <SwiperSlide v-for="(item, index) in slides" :key="item.id" aria-label="" class="slider-navigation__item" @click="slideToIndex(index)">
             <img alt="" height="" :src="item.img" width="">
           </SwiperSlide>
